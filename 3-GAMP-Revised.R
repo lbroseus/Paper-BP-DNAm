@@ -13,10 +13,8 @@ rm(list = ls())
 # Paths and parameters
 #------------------------------------------------------------------------------#
 
-workDir <- "~/Work/BP-DNAme/"
-
 #Meth data generated using Rscript 0_DNAme-Preprocessing.R
-methFile.outgone <- "~/Work/BP-DNAme/Data/bmiq_processed_noOutliers.rds" 
+methFile.outgone <- "Data/bmiq_processed_noOutliers.rds" 
 
 windows <- c("pregnancy", "earlyP", "lateP")
 exposures <- c("SBP", "DBP", "MAP", "PP")
@@ -32,13 +30,6 @@ rmSamples <- c("7327")
 library(magrittr)
 #library(data.table)
 library(GAMP)
-
-################################################################################
-# Load needed columns from the PHENO dataframe 
-# (renamed covariates + cell components)
-#------------------------------------------------------------------------------#
-
-setwd(workDir)
 
 ################################################################################
 # Load methylation data
@@ -126,7 +117,7 @@ clinical_confounders <- c("center", "age", "sex", "BMI", "parity", "education", 
 technical_confounders <- c("batch", "chip", "plate")
 cellTypes <- paste0("CC", 1:5)  # set cellTypes <- 0 for not adjusting
 
-outFile <- "~/Work/BP-DNAme/Results/Tables/BP-GAMP-CCadj.xlsx"
+outFile <- "Results/Tables/BP-GAMP-CCadj.xlsx"
 
 #------------------------------------------------------------------------------#
 # Prepare result data.frame
