@@ -6,22 +6,22 @@ cat("[BP-DNAme] Running Rscript 6-Mediation-ccmm.R...\n")
 # Author: Lucile
 # Date: December 2021
 # Note: 
-# Run Rscript 5-DMRs.R before
+# Run Rscript 4-DMRs.R before
 ################################################################################
 ################################################################################
 # Paths and parameters
 #------------------------------------------------------------------------------#
 
-methFile <- "~/Work/BP-DNAme/Data/bmiq_processed.rds" # no outlier removal (mediate() incompatible with NA in Y)
-CCfile <- "~/Work/BP-DNAme/Data/EDEN_CC.planet_rpc.rds"
-root <- "~/Work/BP-DNAme/Results/EWASI/"
+methFile <- "Data/bmiq_processed.rds" # no outlier removal (mediate() incompatible with NA in Y)
+CCfile <- "Data/EDEN_CC.planet_rpc.rds"
+root <- "Results/EWASI/"
 
-outFile <- "~/Work/BP-DNAme/Results/EWASI/Mediation/ccmmRefCellTypeMediation.rds"
+outFile <- "Results/EWASI/Mediation/ccmmRefCellTypeMediation.rds"
 
 categorical_confounders <- c("batch","chip", "plate", "smoke", "BMI", "education")
 continuous_confounders <- c("age", "parity", "sex", "center")  #or binary
 
-annotationFile <- "~/Work/EDEN/Data/450kanno.ilmn12.hg19.rds"
+annotationFile <- "Data/450kanno.ilmn12.hg19.rds"
 nprobes.min <- 3
 
 exposures <- c("SBP", "DBP", "MAP", "PP")
@@ -192,7 +192,7 @@ genes <- liftOver(genes, chain) %>% unlist()
 methC <- data.frame()
 for(w in seq_along(windows)){
   
-  BPfile <- paste0("~/Work/BP-DNAme/Data/N668_BP1+covariates_", windows[w], ".rds")
+  BPfile <- paste0("Data/N668_BP1+covariates_", windows[w], ".rds")
   
   ##############################################################################
   # 1. Load average BP estimates over the current time window + covariates
