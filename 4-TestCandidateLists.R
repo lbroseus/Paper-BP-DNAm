@@ -15,14 +15,14 @@ cat("[BP-DNAme] Running Rscript 4-TestCandidateLists.R...\n")
 # Files/Target
 #------------------------------------------------------------------------------#
 
-methFile <- "~/Work/BP-DNAme/Data/bmiq_processed_noOutliers.rds"
+methFile <- "Data/bmiq_processed_noOutliers.rds"
 
 # Reports significant hits from Workalemahu2019 and Kazmi2019 studies
-candidateFile1 <- "~/Work/Cohorts/EDEN/PJ_methylBP/Data/CandidateList.xlsx"
+candidateFile1 <- "Data/CandidateList.xlsx"
 # Reports significant hits from studies linking DNAme to maternal HDP
-candidateFile2 <- "~/Work/Cohorts/EDEN/PJ_methylBP/Data/EWAS_Atlas_association_HDP.txt"
+candidateFile2 <- "Data/EWAS_Atlas_association_HDP.txt"
 
-mainOutFile <- "~/Work/BP-DNAme/Results/Tables/SupplementaryTables.xlsx"
+mainOutFile <- "Results/Tables/SupplementaryTables.xlsx"
 
 ################################################################################
 # R packages
