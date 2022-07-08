@@ -15,10 +15,10 @@ cat("[BP-DNAme] Running Rscript 4-TestGlobalMeth.R...\n")
 #------------------------------------------------------------------------------#
 
 #Design information:
-methglobFile <- "~/Data/EDEN/methglobsd2017_04_06.RData" # object methglobsd
+methglobFile <- "~/Data/methglobsd2017_04_06.RData" # object methglobsd
 
 #Meth data generated using Rscript 0-EDEN-DNAmePreprocessing.R
-methFile.outgone <- "~/Work/PM-DNAme/Data/bmiq_processed_noOutliers.rds" 
+methFile.outgone <- "~/Work/bmiq_processed_noOutliers.rds" 
 
 clinical_confounders <- c("center", "age", "sex", "BMI", "parity", "education", "smoke")
 technical_confounders <- c("batch", "puce", "plaque")
@@ -29,7 +29,7 @@ exposures <- c("SBP", "DBP", "MAP", "PP")
 # Clinical Covariates for adjustment (0-Covariates_Preprocessing.R)
 phenoFilePrefix <- "~/Work/BP-DNAme/Data/N668_BP1+covariates_"
 # Output file
-outFile <- "~/Work/BP-DNAme/Results/Tables/BP-globmeth.xlsx"
+outFile <- "Results/Tables/BP-globmeth.xlsx"
 
 rmSamples <- c("7327")
 
