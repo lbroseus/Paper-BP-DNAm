@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
-cat("[BP-DNAme] Running Rscript 6-Mediation.R...\n")
+cat("[BP-DNAme] Running Rscript 6-Mediation-Ratio.R...\n")
 ################################################################################
-# BP-DNAme - Mediation analysis: BP -> CellComp -> DNAme
+# BP-DNAme - Mediation analysis: BP -> Stromal/Syncytiotrophoblast -> DNAme
 ################################################################################
 # Author: Lucile
 # Date: December 2021
@@ -12,16 +12,16 @@ cat("[BP-DNAme] Running Rscript 6-Mediation.R...\n")
 # Paths and parameters
 #------------------------------------------------------------------------------#
 
-methFile <- "~/Work/BP-DNAme/Data/bmiq_processed.rds" # no outlier removal (mediate() incompatible with NA in Y)
-CCfile <- "~/Work/BP-DNAme/Data/EDEN_CC.planet_rpc.rds"
-root <- "~/Work/BP-DNAme/Results/EWASI/"
+methFile <- "Data/bmiq_processed.rds" # no outlier removal (mediate() incompatible with NA in Y)
+CCfile <- "Data/EDEN_CC.planet_rpc.rds"
+root <- "Results/EWASI/"
 
-outFile <- "~/Work/BP-DNAme/Results/EWASI/Mediation/univariateRefCellTypeMediation.rds"
+outFile <- "Results/EWASI/Mediation/StromSyncytioMediation.rds"
 
 categorical_confounders <- c("batch","chip", "plate", "smoke", "BMI", "education")
 continuous_confounders <- c("age", "parity", "sex", "center")  #or binary
 
-annotationFile <- "~/Work/EDEN/Data/450kanno.ilmn12.hg19.rds"
+annotationFile <- "Data/450kanno.ilmn12.hg19.rds"
 nprobes.min <- 3
 
 exposures <- c("SBP", "DBP", "MAP", "PP")
@@ -243,26 +243,21 @@ for(w in seq_along(windows)){
     rm(dmpsI, dmpsII)
   
     ############################################################################
-    # 4. Univariate mediator (each reference cell type at a time)
+    # 4. Univariate mediator (ratio)
     #--------------------------------------------------------------------------#
     
-    for(refCellType in refCellTypes){
-      
-      cat(exposures[e], "-", windows[w], refCellType, "\n")
+      cat(exposures[e], "-", windows[w], "\n")
       
       # Set reference cell type (as targeted mediator):
-      Comp <- Comp[, c(refCellType, setdiff(colnames(Comp), refCellType))]
+      ratio <- Comp[, "Stromal"]/Comp[, "Syncytiotrophoblast"]
       
-      # Apply ilr transformation:
-      z1 <- compositions::ilr(Comp)[,1]
-      
-      # M: reference cell type chosen as univariate mediator
-      M <-  data.frame(id = rownames(Comp), z1)
+      # M: ratio as univariate mediator
+      M <-  data.frame(id = rownames(Comp), ratio)
       colnames(M)[2] <- refCellType
       
       # Fit linear model: mediator-exposure
       mediator.formula <- stats::as.formula(
-        paste(paste0(refCellType, " ~ ", exposures[e]),
+        paste(paste0("ratio", " ~ ", exposures[e]),
               paste(continuous_confounders, collapse = "+"),
               paste(categorical_confounders, collapse = "+"),
               sep = " + ")
@@ -295,7 +290,7 @@ for(w in seq_along(windows)){
                                med.out <- mediation::mediate(mediator.fit, 
                                                              outcome.fit, 
                                                              treat = exposures[e], 
-                                                             mediator = refCellType,
+                                                             mediator = "ratio",
                                                              robustSE = TRUE, sims = 1000)
                                x <- summary(med.out)
                                
@@ -320,13 +315,11 @@ for(w in seq_along(windows)){
       )
       
       methC.result <- do.call(rbind.data.frame, methC.result)
-      methC.result$refCellType <- refCellType
       methC.result <- merge(dmps, methC.result, by = "CpG")
     
       methC <- rbind.data.frame(methC, 
                                 data.frame(methC.result, exposure = exposures[e], window = windows[w]))  
     }
-  }
 }
 
 ################################################################################
