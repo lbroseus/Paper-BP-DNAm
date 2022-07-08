@@ -179,7 +179,7 @@ genes <- liftOver(genes, chain) %>% unlist()
 methC <- data.frame()
 for(w in seq_along(windows)){
   
-  BPfile <- paste0("~/Work/BP-DNAme/Data/N668_BP1+covariates_", windows[w], ".rds")
+  BPfile <- paste0("Data/N668_BP1+covariates_", windows[w], ".rds")
   
   ##############################################################################
   # 1. Load average BP estimates over the current time window + covariates
@@ -249,7 +249,7 @@ for(w in seq_along(windows)){
       cat(exposures[e], "-", windows[w], "\n")
       
       # Set reference cell type (as targeted mediator):
-      ratio <- Comp[, "Stromal"]/Comp[, "Syncytiotrophoblast"]
+      ratio <- log(Comp[, "Stromal"]/Comp[, "Syncytiotrophoblast"])
       
       # M: ratio as univariate mediator
       M <-  data.frame(id = rownames(Comp), ratio)
