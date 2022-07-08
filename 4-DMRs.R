@@ -15,8 +15,8 @@ cat("[BP-DNAme] Running Rscript 5-DMRs.R...\n")
 #------------------------------------------------------------------------------#
 
 # Where EWAS results are to be found
-resDir <- "~/Work/BP-DNAme/Results/EWASI/Main/DMP/"
-saveDir <- "~/Work/BP-DNAme/Results/EWASI/Main/DMR/"
+resDir <- "Results/EWASI/Main/DMP/"
+saveDir <- "Results/EWASI/Main/DMR/"
 if(!dir.exists(saveDir)) dir.create(saveDir)
 
 # Parameters for comb-p
@@ -152,7 +152,7 @@ FullAnnot$geneName <- tapply(FullAnnot$geneName,
 
 library(rtracklayer)
 
-genes <- import.gff("~/Data/Annotation/Homo_sapiens.GRCh38.104.gtf.gz")
+genes <- import.gff("Data/Annotation/Homo_sapiens.GRCh38.104.gtf.gz")
 genes <- genes[genes$type == "gene"]
 
 path <- system.file(package = "liftOver", "extdata", "hg38ToHg19.over.chain")
