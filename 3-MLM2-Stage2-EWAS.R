@@ -53,11 +53,10 @@ includeGDM <- TRUE
 includeSmokers <- TRUE
 
 #------------------------------------------------------------------------------#
-#dataPath <- "~/Work/EDEN/PJ_methylBP/Data/"
-dataPath <- "~/BP-DNAme/Data/"
 
-#resultPath <- "~/Work/EDEN/PJ_methylBP/Results/Test/"
-resultPath <- "~/BP-DNAme//Results/"
+dataPath <- "Data"
+
+resultPath <- "Results"
 
 #------------------------------------------------------------------------------#
 # Shared parameters (assumed to be fixed for all analyses..?)
