@@ -19,7 +19,7 @@ cat("[BP-DNAme] Running Rscript 0-DNAme-Preprocessing...\n")
 #------------------------------------------------------------------------------#
 
 # BMIQ data provided by Johanna
-methFile <- "~/Data/EDEN/METHYL/FDF/BMIQ/bmiq_no_duplicates.RDS"
+methFile <- "~/Data/bmiq_no_duplicates.RDS"
 
 # Final BMIQ data sets
 outFile1 <- "Data/bmiq_processed.rds"             # needed for mediation analysis
