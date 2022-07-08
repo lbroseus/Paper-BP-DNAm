@@ -6,14 +6,14 @@ cat("[BP-DNAme] Running Rscript 6-GeneSetEnrichmentDMRs.R...\n")
 # Author: Lucile
 # Date of creation: November 2021
 # Note: 
-# Run Rscript 5-DMRs.R before
+# Run Rscript 4-DMRs.R before
 ################################################################################
 # Paths and parameters
 #------------------------------------------------------------------------------#
 
 # Where DMR results are to be found
-resDir <- "~/Work/BP-DNAme/Results/EWASI/Main/DMR/"
-saveDir <- "~/Work/BP-DNAme/Results/EWASI/Main/GSEA/"
+resDir <- "Results/EWASI/Main/DMR/"
+saveDir <- "Results/EWASI/Main/GSEA/"
 # Parameters (GSEA)
 
 minNbProbes <- 3
